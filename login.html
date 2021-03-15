@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Customer Login</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+
+    <header>
+      <img src="toplogo.png">
+      <div class="navigation">
+        <table>
+          <tr>
+              <td><a href="index.html">Home</a></td>
+          </tr>
+          <tr>
+              <td><a href="create_account.html">Create Account</a></td>
+          </tr>
+          <tr>
+              <td><a href="login.html">Log in</a></td>
+          </tr>
+        </table>
+      </div>
+    </header>
+
+    <main>
+
+      <div class="title">
+        <h1>Around The Corner</h1>
+        <p id="description_one"> <strong>Welcome back!</strong> Log-in now: </p>
+      </div>
+
+      <nav>
+        <label for="email">Email: </label><input type="text" id="email">
+        <label for="password">Password: </label><input type="password" id="password">
+        <div id="center"><button onclick = "login()" id="login">Log in</button></div>
+      </nav>
+    </main>
+
+    <script src="https://mysqljs.com/mysql.js" type="text/javascript"></script>
+    <script>
+      
+      function login() { 
+        console.log("here");
+        let email = document.getElementById("email").value
+        let password = document.getElementById("password").value
+        let EmployeeID = ""
+
+        let sqlSelect = "SELECT EmployeeID FROM Employees WHERE email like \"" + email +"\" AND password like \"" + password +"\";";
+        
+        MySql.Execute( 
+          "107.180.1.16", 
+          "group62021",
+          "2021group6",
+          "group62021",
+
+          sqlSelect,
+          function (data){
+            console.log(data);
+            if (data.Result.length != 0){
+              EmployeeID = data.Result[0].EmployeeID;
+              console.log(EmployeeID);
+              updateSession();
+              
+            }
+            else {
+             console.log('hi there');
+
+            }
+          }
+          )
+
+        function updateSession() {
+          let sqlStmt = "UPDATE Session SET EmployeeID = "+ EmployeeID + " WHERE SessionID = 1";
+
+          MySql.Execute(
+          "107.180.1.16", 
+          "group62021",
+          "2021group6",
+          "group62021",
+
+          sqlStmt,
+          console.log(sqlStmt)
+        )
+        }  
+
+        function deleteSession() {
+          let deleteSession = "DELETE FROM Session Where SessionID = 1";
+          
+          MySql.Execute(
+          "107.180.1.16", 
+          "group62021",
+          "2021group6",
+          "group62021",
+
+          deleteSession,
+          console.log("after delete")
+          )
+          setTimeout(newSession, 3000);
+          newSession();
+        }
+
+        function newSession() {
+          let sqlStmt = "INSERT INTO Session (EmployeeID) Values ("+ EmployeeID + ")";
+
+          MySql.Execute(
+          "107.180.1.16", 
+          "group62021",
+          "2021group6",
+          "group62021",
+
+          sqlStmt,
+          console.log("in insert")
+        )
+        }    
+        }
+            
+    </script>        
+  </body>
+</html>
