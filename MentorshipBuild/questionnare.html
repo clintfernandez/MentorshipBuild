@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="master-div-style">
+      <p id="description">Please complete this form to find potential mentors to be paired with.</p>
+      <form id="survey-form" action="/do-something">
+        <div class="form-rows">
+          <div class="labels">
+            <label for="name" id="name-label">Name</label>
+          </div>
+          <div class="fields">
+            <input type="text" id="name" class="input-fields" placeholder="Enter your name" required="">
+          </div>
+        </div>
+        <div class="form-rows">
+            <div class="labels">
+              <label for="ID" id="ID-label">Employee ID</label>
+            </div>
+            <div class="fields">
+              <input type="text" id="ID" class="input-fields" placeholder="Enter your employee ID" required="">
+            </div>
+          </div>
+        <div class="form-rows">
+          <div class="labels">
+            <label for="email" id="email-label">Email</label>
+          </div>
+          <div class="fields">
+            <input type="email" id="email" class="input-fields" placeholder="Enter your email address" required="">
+          </div>
+        </div>
+        <div class="form-rows">
+          <div class="labels">
+            <label for="dropdown" id="dropdown-label">What is your current work/office setting?</label>
+          </div>
+          <div class="fields">
+            <select name="Work setting" id="dropdown" class="dropdown">
+                <option value="wfh">WFH</option>
+                <option value="office">In office (in person)</option>
+                <option value="hybrid">Hybrid</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-rows">
+          <div class="labels">
+            <label for="time zone">What time zone are you in?</label>
+          </div>
+          <div class="fields">
+            <select name="Time zone" id="dropdown" class="dropdown">
+                <option value="hst">Hawaii-Aleutian Standard Time (HST)</option>
+                <option value="akst">Alaskan Standard Time (AKST)</option>
+                <option value="pst">Pacific Standard Time (PST)</option>
+                <option value="mst">Mountain Standard Time (MST)</option>
+                <option value="cst">Central Standard Time (CST)</option>
+                <option value="est">Eastern Standard Time (EST)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-rows">
+          <div class="labels">
+            <label for="time expectation">
+              How often do you anticipate meeting with your mentor?
+              <br>
+              (Select all that apply)
+            </label>
+          </div>
+          <div class="fields">
+            <ul id="time expectation" style="list-style: none;">
+              <li class="radio">
+                <label>
+                  <input name="expectation-check" value="1" type="checkbox" class="user-selection">
+                  Rarely (as needed per Onboarding Guidelines)
+                </label>
+              </li>
+              <li class="radio">
+                <label>
+                  <input name="expectation-check" value="2" type="checkbox" class="user-selection">
+                  Quarterly
+                </label>
+              </li>
+              <li class="radio">
+                <label>
+                  <input name="expectation-check" value="3" type="checkbox" class="user-selection">
+                  Monthly
+                </label>
+              </li>
+              <li class="radio">
+                <label>
+                  <input name="expectation-check" value="4" type="checkbox" class="user-selection">
+                  Weekly
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="form-rows">
+          <div class="labels">
+            <label for="event-details">
+              Please indicate what area(s) you would like to focus on in regards to the relationship with your core mentor. 
+            </label>
+          </div>
+          <div class="fields">
+            <ul id="topic expectation" style="list-style: none;">
+              <li class="radio">
+                <label>
+                  <input name="topic-check" value="1" type="checkbox" class="user-selection" id="leadership">
+                  General Leadership
+                </label>
+              </li>
+              <li class="radio">
+                <label>
+                  <input name="topic-check" value="2" type="checkbox" class="user-selection" id="technical">
+                  Technical Knowledge
+                </label>
+              </li>
+              <li class="radio">
+                <label>
+                  <input name="topic-check" value="3" type="checkbox" class="user-selection" id="advising">
+                  Career Advising & Development
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <button class="button" id="submit" type="submit" onclick="addMatch()">Submit</button>
+      </form>
+    </div>
+
+    <script src="https://mysqljs.com/mysql.js" type="text/javascript"></script>
+
+    <script>
+      function addMatch() {
+        let name = document.getElementById("name").value;
+        let id = document.getElementById("ID").value;
+        let email = document.getElementById("email").value;
+        let worksetting = document.getElementsByName("Work setting").value;
+        let timezone = document.getElementsByName("Time zone").value;
+        let schedule = document.getElementById("time expectation").value;
+        let leadership = document.getElementById("leadership").checked;
+        let technical = document.getElementById("technical").checked;
+        let advising = document.getElementById("advising").checked;
+        let values = "\"" + name + "\", \"" + id + "\", \"" + email + "\", \"" + worksetting + "\", \"" + timezone + "\", \"" + schedule + "\", \"" + leadership + "\", \"" + technical + "\", \"" + advising + "\"";
+          console.log(values);
+        let sqlSelect = "SELECT * FROM Employees WHERE name like \"" + name + "\" AND Employee ID like \"" + id +"\";"
+        let sqlStmt = "INSERT INTO Matches (Name, Employee ID, Email Address, Work Setting, Time Zone, Availability, Leadership, Technical, Career Development) VALUES (" + values + ");";
+
+        MySql.Execute(
+            "107.180.1.16",
+            "group62021",
+            "2021group6",
+            "group62021",
+            sqlSelect,
+            function (data){
+              console.log(data);
+              console.log("result length: "+ data.Result.length);
+              if (data.Result.length < 1){
+                insertsql();
+              }
+              else{
+                console.log("not quite");
+              }
+            }
+            )
+              function insertsql(){
+              MySql.Execute(
+                "107.180.1.16", 
+                "group62021",
+                "2021group6",
+                "group62021",
+                sqlStmt,
+                function(data){
+                  console.log(data);
+                }
+              )
+          }
+
+
+      }
+    </script>
+  </body>
+</html>
