@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<html>
+
+  <head>
+    <title>Create Account</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+
+    <header>
+      <img src="toplogo.png">
+      <div class="navigation">
+        <table>
+          <tr>
+              <td><a href="index.html">Home</a></td>
+          </tr>
+          <tr>
+              <td><a href="create_account.html">Create Account</a></td>
+          </tr>
+          <tr>
+              <td><a href="login.html">Login</a></td>
+          </tr>
+          <tr>
+            <td><a href="review.html">Leave a comment/review</a></td>
+          </tr>
+        </table>
+      </div>
+    </header>
+
+    <main>
+      <p>Some Customer Reviews</p>
+
+      <div class="container" style = "display:none;" id="print">
+        <p id="demo"> &emsp; </p> 
+        <p class="review" id="me">  </p> </br> 
+
+        <input type="button" class="button" value="Ask Question" onclick="reviewFunction()">
+      </div>
+
+      <input type="button" name="" value="Show More" onclick="printReview()">
+      
+    </main>
+
+<script>
+  function printReview() {
+    document.getElementById("print").style.display = "block";
+  }
+</script>
+
+<script>
+function myFunction() {
+  alert("Welcome! Please press 'OK' to ask or comment.");
+  var person = prompt("Please enter your name here:", "Type here");
+  var restn = prompt("Please enter the topic here:", "Type here");
+  var reviewType = prompt("Please enter your comment here:", "Type here");
+  if (person != null) {
+   document.getElementById("demo").innerHTML = "<span>" + person + ".   " + "</span>" + " " + " " + restn
+   document.getElementById("me").innerHTML = reviewType
+  }
+} 
+</script>
+
+
+<script>
+  var reviews = [ ]
+function reviewFunction() {
+  alert("Welcome! Please press 'OK' to ask a question or leave a comment.");
+  var txt;
+  var review =prompt("Please enter a comment or question here:", "Type here");
+  if (review != null) {
+    alert("Your question/comment has been sucessfully submitted.")
+  }
+}
+
+</script>
+  </body>
+</html>
