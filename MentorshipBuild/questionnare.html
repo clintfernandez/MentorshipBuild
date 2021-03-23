@@ -64,39 +64,15 @@
         </div>
         <div class="form-rows">
           <div class="labels">
-            <label for="time expectation">
-              How often do you anticipate meeting with your mentor?
-              <br>
-              (Select all that apply)
-            </label>
+            <label for="time zone">How often do you anticipate meeting with your mentor?</label>
           </div>
           <div class="fields">
-            <ul id="time expectation" style="list-style: none;">
-              <li class="radio">
-                <label>
-                  <input name="expectation-check" value="1" type="checkbox" class="user-selection">
-                  Rarely (as needed per Onboarding Guidelines)
-                </label>
-              </li>
-              <li class="radio">
-                <label>
-                  <input name="expectation-check" value="2" type="checkbox" class="user-selection">
-                  Quarterly
-                </label>
-              </li>
-              <li class="radio">
-                <label>
-                  <input name="expectation-check" value="3" type="checkbox" class="user-selection">
-                  Monthly
-                </label>
-              </li>
-              <li class="radio">
-                <label>
-                  <input name="expectation-check" value="4" type="checkbox" class="user-selection">
-                  Weekly
-                </label>
-              </li>
-            </ul>
+            <select name="Frequency" id="dropdown" class="dropdown">
+                <option value="rarely">Rarely (as needed per Onboarding Guidelines)</option>
+                <option value="quarterly">Quarterly</option>
+                <option value="monthly">Monthly</option>
+                <option value="weekly">Weekly</option>
+            </select>
           </div>
         </div>
         <div class="form-rows">
