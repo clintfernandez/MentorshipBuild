@@ -20,7 +20,7 @@
 	</style>
   </head>
 
-  <body onload="fillMentors()">
+  <body onload="fillMentees()">
     
     <header>
       <img src="toplogo.png">
@@ -53,75 +53,101 @@
 
     <script src="https://mysqljs.com/mysql.js" type="text/javascript"></script>
     <script>
-      
-      function fillMentors() { 
+      var mentees = [];
+      let MentorID  = ""
+      let menteeSql = ""
+      function fillMentees() {
+          
+        let sqlSelect = "SELECT EmployeeID FROM Session;"
+          MySql.Execute( 
+            "107.180.1.16", 
+            "group62021",
+            "2021group6",
+            "group62021",
 
-        let sqlStmt = "SELECT * FROM Matches WHERE EmployeeType like \"Mentor\";"
+            sqlSelect,
+            function (data){
+              console.log(data);
+              console.log("result length: "+ data.Result.length);
+              if (data.Result.length = 1){
+                MentorID = data.Result[0].EmployeeID
+                menteeSql = "SELECT MenteeID FROM Requests WHERE MentorID = " + MentorID
+                menteeArray();
+              }
+              else {
+               alert("Must log in to request a mentor");
+              }
+            }
+            )
+}
+
+      function menteeArray(){
+        MySql.Execute( 
+          "107.180.1.16", 
+          "group62021",
+          "2021group6",
+          "group62021",
+
+          menteeSql,
+          function (data){
+            for (i=0; i<data.Result.length; i++){
+              mentees.push(String(data.Result[i].MenteeID))
+              console.log(mentees)
+              menteeInfo()
+            }
+      }
+      )
+}
+      function menteeInfo() {
+        let sqlStmt = "SELECT * FROM Matches WHERE EmployeeType like \"Mentee\";"
         /*if (document.getElementById("a").hasChildNodes("ul")){
         document.getElementById("a").removeChild("ul");
       }*/
       	
         MySql.Execute("107.180.1.16", "group62021", "2021group6", "group62021", sqlStmt, function (data){
-               for (i=0; i<data.Result.length; i++) {
+
+          // we are getting an extra loop before the for loop for some reason
+
+              for (i=0; i<data.Result.length; i++) {
+                console.log(data.Result[i].EmployeeID)
+                if (mentees.includes(data.Result[i].EmployeeID)){
                	var option = document.createElement("div");
                	var row = document.createElement("tr");
+
                	var name = document.createElement("td");
                	var email = document.createElement("td");
                	var availability = document.createElement("td");
                	var guts = '<button>Request</button>';
+
                 name.innerHTML = data.Result[i].Name;
                 email.innerHTML = data.Result[i].Email;
                 availability.innerHTML = data.Result[i].Availability;
-                
-                console.log(data)
+
                 row.append(name)
                 row.append(email)
                 row.append(availability)
-				$($.trim(guts)).appendTo(row).bind('click', data.Result[i].EmployeeID, request);
-				option.append(row)
-        		document.getElementById("fillDiv").append(option);
+        				$($.trim(guts)).appendTo(row).bind('click', data.Result[i].EmployeeID, accept);
 
+        				option.append(row)
+        		    document.getElementById("fillDiv").append(option);
+        }
+        else {
+          console.log("write something")
+        }
         }
         }
         )
     }
 
 	    let MenteeID = ""
-	    let MentorID = ""
-	    let insertStmt = ""
+	    let updateStmt = ""
 	    let checkStmt = ""
-    function request(data) { 
+    function accept(data) { 
 	    console.log("here");
-	    let MentorID  = data.data
-	    console.log(MentorID);
-	    
-	    let sqlSelect = "SELECT EmployeeID FROM Session;"
-	        MySql.Execute( 
-	          "107.180.1.16", 
-	          "group62021",
-	          "2021group6",
-	          "group62021",
+	    let MenteeID  = data.data
+	    console.log(MenteeID);
+	    checkStmt = "SELECT * FROM Employees WHERE MentorID = " + MentorID + " AND MenteeID = " + MenteeID
 
-	          sqlSelect,
-	          function (data){
-	            console.log(data);
-	            console.log("result length: "+ data.Result.length);
-	            if (data.Result.length = 1){
-	            	MenteeID = data.Result[0].EmployeeID
-	            	values = "\"" + MentorID + "\", \"" + MenteeID + "\"";
-	            	insertStmt = "INSERT INTO Requests (MentorID, MenteeID) VALUES (" + values + ");";
-	            	checkStmt = "SELECT * FROM Requests WHERE MentorID = " + MentorID + " AND MenteeID = " + MenteeID
-
-	             	checksql();
-	            }
-	            else {
-	             alert("Must log in to request a mentor");
-	            }
-	          }
-	          )
-}
-
-	function checksql(){
     	MySql.Execute(
       		"107.180.1.16", 
         	"group62021",
@@ -130,23 +156,26 @@
         	checkStmt,
         	function (data){
         		if (data.Result.length < 1){
-        			insertsql()
+              // Two update statements in the same string. will this work?? let's find out
+              updateStmt = "UPDATE Employees SET PairID = "+ MenteeID+" WHERE EmployeeID = " + MentorID+"; UPDATE Employees SET PairID = "+ MentorID+ " WHERE EmployeeID = " + MenteeID+";";
+                
+        			updatesql()
         		}
         		else {
-        			alert("You already requested this mentor!")
+        			alert("You already have a mentee!")
         		}
         	}
       )
 		}
 
-    function insertsql(){
-    	console.log(insertStmt)
+    function updatesql(){
+    	console.log(updateStmt)
     	MySql.Execute(
         	"107.180.1.16", 
         	"group62021",
         	"2021group6",
         	"group62021",
-        	insertStmt
+        	updateStmt
       )
 		}
 
