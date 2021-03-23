@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>View Profile</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="navigation">
+      <p>Search for employee by name: </p>
+      <input type="text" id="nameSearch" placeholder="Enter name">
+      <button class="button" id="search" onclick="searchEmployees">Search</button>
+      <br><br>
+      <label>Employee Name: </label>
+      <input type="text" id="name" disabled><br>
+      <label>Employee Email: </label>
+      <input type="text" id="email" disabled><br>
+      <label>Employee Type: </label>
+      <input type="text" id="type" disabled>
+      
+
+      <script src="https://mysqljs.com/mysql.js" type="text/javascript"></script>
+
+      <script>
+      function searchEmployees() {
+        var name;
+        var email;
+        var type;
+
+        let nameSearch = document.getElementById("nameSearch").value;
+        console.log(nameSearch);
+        let sqlSelect = "SELECT * FROM Employees WHERE Name like \"" + nameSearch + "\";";
+
+        MySql.Execute( 
+              "107.180.1.16", 
+              "group62021",
+              "2021group6",
+              "group62021",
+              sqlSelect,
+              function (data){
+                console.log(data);
+                console.log("result length: "+ data.Result.length);
+                document.getElementById("name") = data.Result.Name;
+                document.getElementById("email") = data.Result.Email;
+                document.getElementById("type") = data.Result.EmployeeType;
+      }
+        )
+      }
+      </script>
+  </body>
+</html>
