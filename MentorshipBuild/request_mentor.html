@@ -4,6 +4,20 @@
     <title>Create Account</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style type="text/css">
+		#fillDiv td {
+			padding: 2px;
+		}
+
+		#fillDiv td::after {
+			content: " | ";
+		}
+
+		#fillDiv div {
+			margin-bottom: 25px;
+		}
+
+	</style>
   </head>
 
   <body onload="fillMentors()">
@@ -46,31 +60,77 @@
         /*if (document.getElementById("a").hasChildNodes("ul")){
         document.getElementById("a").removeChild("ul");
       }*/
-        var option = document.createElement("div");        
+      	
         MySql.Execute("107.180.1.16", "group62021", "2021group6", "group62021", sqlStmt, function (data){
                for (i=0; i<data.Result.length; i++) {
-               	var name = document.createElement("p");
-               	var email = document.createElement("p");
-               	var availability = document.createElement("p");
+               	var option = document.createElement("div");
+               	var row = document.createElement("tr");
+               	var name = document.createElement("td");
+               	var email = document.createElement("td");
+               	var availability = document.createElement("td");
                	var guts = '<button>Request</button>';
                 name.innerHTML = data.Result[i].Name;
                 email.innerHTML = data.Result[i].Email;
                 availability.innerHTML = data.Result[i].Availability;
                 
                 console.log(data)
-                option.append(name)
-                option.append(email)
-                option.append(availability)
-				$($.trim(guts)).appendTo(option).bind('click', data.Result[i].EmployeeID, magick);
+                row.append(name)
+                row.append(email)
+                row.append(availability)
+				$($.trim(guts)).appendTo(row).bind('click', data.Result[i].EmployeeID, request);
+				option.append(row)
         		document.getElementById("fillDiv").append(option);
 
         }
         }
         )
     }
-        function magick(data) {
-        	console.log(data.data)
-          }
+
+	    let MenteeID = ""
+	    let MentorID = ""
+	    let insertStmt = ""
+    function request(data) { 
+	    console.log("here");
+	    let MentorID  = data.data
+	    console.log(MentorID);
+	    
+	    let sqlSelect = "SELECT EmployeeID FROM Session;"
+	        MySql.Execute( 
+	          "107.180.1.16", 
+	          "group62021",
+	          "2021group6",
+	          "group62021",
+
+	          sqlSelect,
+	          function (data){
+	            console.log(data);
+	            console.log("result length: "+ data.Result.length);
+	            if (data.Result.length = 1){
+	            	MenteeID = data.Result[0].EmployeeID
+	            	values = "\"" + MentorID + "\", \"" + MenteeID + "\"";
+	            	        console.log(values);
+
+	            	insertStmt = "INSERT INTO Requests (MentorID, MenteeID) VALUES (" + values + ");";
+	    			console.log(insertStmt);
+	             	insertsql();
+	            }
+	            else {
+	             alert("Must log in to request a mentor");
+	            }
+	          }
+	          )
+}
+	        function insertsql(){
+	        	console.log(insertStmt)
+	          MySql.Execute(
+	            "107.180.1.16", 
+	            "group62021",
+	            "2021group6",
+	            "group62021",
+	            insertStmt
+	          )
+	  		}
+
     </script>
   </body>
 
