@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Request Mentor</title>
+    <title>Approve Request</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<style type="text/css">
@@ -46,8 +46,8 @@
     <main>
 
       <div class="title">
-        <h1>Request A Mentor</h1>
-        <p id="description_one"> <strong>Welcome!</strong> Request Mentors Below: </p>
+        <h1>Choose A Mentee</h1>
+        <p id="description_one"> <strong>Welcome!</strong> Choose a mentee below: </p>
         <div id="fillDiv"></div>
       </div>
 
@@ -67,8 +67,6 @@
 
             sqlSelect,
             function (data){
-              console.log(data);
-              console.log("result length: "+ data.Result.length);
               if (data.Result.length = 1){
                 MentorID = data.Result[0].EmployeeID
                 menteeSql = "SELECT MenteeID FROM Requests WHERE MentorID = " + MentorID
@@ -92,48 +90,45 @@
           function (data){
             for (i=0; i<data.Result.length; i++){
               mentees.push(String(data.Result[i].MenteeID))
-              console.log(mentees)
-              menteeInfo()
             }
+            menteeInfo()
       }
       )
 }
+
       function menteeInfo() {
         let sqlStmt = "SELECT * FROM Matches WHERE EmployeeType like \"Mentee\";"
         /*if (document.getElementById("a").hasChildNodes("ul")){
         document.getElementById("a").removeChild("ul");
       }*/
-      	
-        MySql.Execute("107.180.1.16", "group62021", "2021group6", "group62021", sqlStmt, function (data){
+        MySql.Execute("107.180.1.16", "group62021", "2021group6", "group62021", sqlStmt, function (m){
 
           // we are getting an extra loop before the for loop for some reason
+              for (i=0; i<m.Result.length; i++) {
+                if (mentees.includes(m.Result[i].EmployeeID)){
+                 	var option = document.createElement("div");
+                 	var row = document.createElement("tr");
 
-              for (i=0; i<data.Result.length; i++) {
-                console.log(data.Result[i].EmployeeID)
-                if (mentees.includes(data.Result[i].EmployeeID)){
-               	var option = document.createElement("div");
-               	var row = document.createElement("tr");
+                 	var name = document.createElement("td");
+                 	var email = document.createElement("td");
+                 	var availability = document.createElement("td");
+                 	var guts = '<button>Approve</button>';
 
-               	var name = document.createElement("td");
-               	var email = document.createElement("td");
-               	var availability = document.createElement("td");
-               	var guts = '<button>Request</button>';
+                  name.innerHTML = m.Result[i].Name;
+                  email.innerHTML = m.Result[i].Email;
+                  availability.innerHTML = m.Result[i].Availability;
 
-                name.innerHTML = data.Result[i].Name;
-                email.innerHTML = data.Result[i].Email;
-                availability.innerHTML = data.Result[i].Availability;
+                  row.append(name)
+                  row.append(email)
+                  row.append(availability)
+          				$($.trim(guts)).appendTo(row).bind('click', m.Result[i].EmployeeID, accept);
 
-                row.append(name)
-                row.append(email)
-                row.append(availability)
-        				$($.trim(guts)).appendTo(row).bind('click', data.Result[i].EmployeeID, accept);
-
-        				option.append(row)
-        		    document.getElementById("fillDiv").append(option);
-        }
-        else {
-          console.log("write something")
-        }
+          				option.append(row)
+          		    document.getElementById("fillDiv").append(option);
+                }
+                else {
+                  console.log("write something")
+                }
         }
         }
         )
@@ -144,9 +139,9 @@
 	    let checkStmt = ""
     function accept(data) { 
 	    console.log("here");
-	    let MenteeID  = data.data
+	    MenteeID  = data.data
 	    console.log(MenteeID);
-	    checkStmt = "SELECT * FROM Employees WHERE MentorID = " + MentorID + " AND MenteeID = " + MenteeID
+	    checkStmt = "SELECT * FROM Employees WHERE PairID = " + MentorID
 
     	MySql.Execute(
       		"107.180.1.16", 
