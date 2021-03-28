@@ -54,36 +54,8 @@
 
         let values =  \"" + question + "\"
         console.log(values);
-        let sqlSelect = "SELECT * FROM Questions WHERE email like \"" + email + "\";"
         let sqlStmt = "INSERT INTO Questions (idQuestions, Question, Tag, EmployeeID, Name) VALUES (" + values + ");";
-        console.log(sqlStmt);
-            MySql.Execute( 
-              "107.180.1.16", 
-              "group62021",
-              "2021group6",
-              "group62021",
-
-              sqlSelect,
-              function (data){
-                console.log(data);
-                console.log("result length: "+ data.Result.length);
-                if (data.Result.length < 1){
-                  insertsql();
-                }
-                else {
-                 alert("This email already in use");
-                }
-              }
-              )
-            function insertsql(){
-              MySql.Execute(
-                "107.180.1.16", 
-                "group62021",
-                "2021group6",
-                "group62021",
-
-                sqlStmt
-              )
+        
       }
           }
     </script>
