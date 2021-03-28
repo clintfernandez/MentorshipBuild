@@ -85,6 +85,7 @@
         document.getElementById("question").innerHTML = question
         
 
+<<<<<<< HEAD
         let sqlStmt = "INSERT INTO Questions (Question, EmployeeID, Name) VALUES (" + values + ");";
         
             function insertsql(){
@@ -96,6 +97,12 @@
 
                 sqlStmt
               )
+=======
+        let values =  \"" + question + "\"
+        console.log(values);
+        let sqlStmt = "INSERT INTO Questions (idQuestions, Question, Tag, EmployeeID, Name) VALUES (" + values + ");";
+        
+>>>>>>> 28d9fce7f86361cbf66f550e7f41dfc207367851
       }
           }
     </script>
