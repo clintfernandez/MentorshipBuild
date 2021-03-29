@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Progress Tracker</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- stylesheets -->
+		<link rel="stylesheet" href="dist/css/form-saver.css" type="text/css">
+		<style type="text/css">
+			body {
+				max-width: 40em;
+				width: 88%;
+				margin-left: auto;
+                margin-right: auto;}
+            table,
+            td {
+                border: 1px solid black;
+                }
+            img {
+                height: 200px;
+                width: 700px;
+            }
+            textarea {
+                width: 500px;
+                height: 50px;
+            }
+		</style>
+	</head>
+
+	<body>
+<h2>Onboarding Progress Tracker</h2>
+<form id="form-id" action="mailto:someone@gmail.com" method="POST" enctype=”multipart/form-data”>
+    <div>
+        <img src="part1.png">
+    </div>
+    <div>
+        <input type="checkbox" name="checkbox1" value="1"><label>Request a mentor through the Mentorship Matching Portal</label>
+    </div>
+    <div>
+        <input type="checkbox" name="checkbox2" value="2"><label>Discuss potential backlog of projects with your manager</label>
+    </div>
+    <div>
+        <input type="checkbox" name="checkbox3" value="3"><label>Begin mandatory training modules via MyLearning (Internal Company Learning modules)</label>
+    </div>
+    <br>
+    <div>
+        <img src="part2.png">
+    </div>
+    <div>
+        <input type="checkbox" name="checkbox5" value="5"><label>Review company+department internal website</label>
+    </div>
+    <div>
+        <input type="checkbox" name="checkbox6" value="6"><label>Develop plan associated with backlog of projects</label>
+    </div>
+    <div>
+        <input type="checkbox" name="checkbox7" value="7"><label>Confirm personal information within HR portal</label>
+    </div>
+    <div>
+        <input type="checkbox" name="checkbox8" value="8"><label>Schedule a 1:1 & meet with your core mentor</label>
+    </div>
+    <div>
+        <input type="checkbox" name="checkbox9" value="9"><label>Join the New Hire Teams group</label>
+    </div>
+    <br>
+    <div>
+        <img src="part3.png">
+    </div>
+    <div>
+        <input type="checkbox" name="checkbox10" value="10"><label>One Stop Shop</label>
+    </div>
+    <div>
+        <input type="checkbox" name="checkbox11" value="11"><label>Microsoft PowerBI</label>
+    </div>
+    <div>
+        <input type="checkbox" name="checkbox12" value="12"><label>IBM Jazz Tool suite</label>
+    </div>
+    <br>
+    <div>
+        <img src="part4.png">
+    </div>
+    <div>
+        <input type="checkbox" name="checkbox13" value="13"><label>I have reached out to all relevant key contacts</label>
+    </div>
+    <br>
+    <div>
+        <textarea name="textarea" placeholder="Additional notes"></textarea>
+    </div>
+    <br>
+    <div class="form-saver">
+        <div data-form-status></div>
+        <div>
+            <button data-form-save="#form-id">
+                Save Form Data
+            </button>
+            <button data-form-delete="#form-id">
+                Delete Form Data
+            </button>
+            <button type="submit" value="Submit">Send progress to manager</button>
+        </div>
+    </div>
+</form>
+			</section>
+		</main>
+
+		<!-- Javascript -->
+		<script src="dist/js/form-saver.js"></script>
+		<script>
+			formSaver.init();
+		</script>
+
+
+	</body>
+</html>
