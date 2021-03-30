@@ -1,0 +1,209 @@
+body {
+	background-color: cornsilk;
+	margin: 0px;
+	max-height: 100%;
+	max-width: 100%;
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* header */
+	
+header {
+	width: 230px;
+	height: 100%;
+	overflow: AUTO;
+	float: left;
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	position: fixed;
+	background-color: #85b200;
+}
+
+header img {
+	width: 11%;
+	padding: 35px;
+	position: fixed;
+}
+
+header .navigation {
+	text-align: center;
+	position: left;
+	padding-top: 250px;
+	max-height: 100%;
+	max-width: 100%;
+}
+
+.navigation td {
+	padding: 0px 40px 30px 55px;
+}
+
+.navigation a {
+	text-decoration: none;
+	color: white;
+	font-family: Arial;
+	font-size: 17px;
+	font-weight: bold;
+}
+
+.navigation a:hover {
+	color: darkgreen;
+}
+
+
+
+/* main */
+main {
+	padding-left: 200px;
+}
+
+
+
+/* homepage */ 
+.title {
+	padding: 15px 450px 30px 50px;
+	font-family: Arial;
+}
+
+.title h1 {
+	font-size: 70px;
+	padding-left: 90px;
+	color: darkgreen;
+	margin-bottom: 10px;
+}
+
+.title #description_one {
+	font-size: 28px;
+	padding-left: 90px;
+	font-style: italic;
+	text-align: left;
+	margin-top: 10px;
+}
+
+.title #description_two {
+	font-size: 20px;
+	padding-left: 90px;
+	font-style: italic;
+	text-align: left;
+	margin: 0px;
+	color: darkgreen;
+}
+
+#logo {
+	width: 1210px;
+	padding: 30px 0px 0px 30px;
+}
+
+.map {
+	width: 1210px;
+	padding: 30px 0px 0px 30px;
+	font-size: 20px
+}
+
+.bottom_description {
+	padding: 10px 200px 10px 185px;
+	font-family: Arial;
+	text-align: center;
+}
+
+.bottom_description h2 {
+	color: darkgreen;
+}
+
+
+
+/* searchproduct */ 
+#a {
+	display: flex;
+  	justify-content: center;
+  	color: darkgreen;
+  	padding-top: 10%;
+  	padding-left: 15%;
+
+}
+
+header img {
+	height: 170px;
+	width: 170px;
+}
+
+	
+	
+	
+	nav {
+		font-weight: bold;
+		text-align: center;
+		padding: 20px;
+		border-radius: 5px;
+		color: darkgreen;
+	}
+	nav li {
+		border-bottom: 1px solid darkblue;
+	}
+	nav a {
+		text-decoration: none;
+	}
+	nav ul {
+		list-style-type: none;
+		padding-left: 0px;
+		font-size: 1.2em;
+	}
+	
+	nav a:hover {
+		color: #A52A2A;
+	}
+	
+	input[type=text] {
+	  width: 65%;
+	  padding: 12px;
+	  margin: 8px;
+	  
+	}
+	input[type=password] {
+		width: 65%;
+		padding: 12px;
+		margin: 8px;
+		
+	  }
+	
+	#map {
+		 height: 400px;
+		 /* The height is 400 pixels */
+		 width: 60%;
+		 /* The width is the width of the web page */
+		 margin-left: 249px;
+
+	}
+
+
+	label{
+	display:inline-block;
+	width:200px;
+	margin-right:30px;
+	text-align:right;
+	}
+	
+	#center{
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	}
+
+	.buttons {
+		background-color: #4CAF50; /* Green */
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		transition-duration: .4s;
+		  }
+	.buttons:hover{
+		background-color: grey;
+		color: white;
+	}
+	
+	
