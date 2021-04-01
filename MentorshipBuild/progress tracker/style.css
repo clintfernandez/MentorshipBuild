@@ -95,11 +95,7 @@ main {
 	padding: 30px 0px 0px 30px;
 }
 
-.map {
-	width: 1210px;
-	padding: 30px 0px 0px 30px;
-	font-size: 20px
-}
+
 
 .bottom_description {
 	padding: 10px 200px 10px 185px;
@@ -158,24 +154,7 @@ header img {
 	  width: 65%;
 	  padding: 12px;
 	  margin: 8px;
-	  
-	}
-	input[type=password] {
-		width: 65%;
-		padding: 12px;
-		margin: 8px;
-		
-	  }
-	
-	#map {
-		 height: 400px;
-		 /* The height is 400 pixels */
-		 width: 60%;
-		 /* The width is the width of the web page */
-		 margin-left: 249px;
-
-	}
-
+    }
 
 	label{
 	display:inline-block;
