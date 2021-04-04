@@ -115,7 +115,7 @@
     </body>
     <script src="https://mysqljs.com/mysql.js" type="text/javascript"></script>
     <script>
-      let EmployeeID = ""
+      let EmployeeID = "1"
       let MatchingPortal = document.getElementById("checkbox1").checked
       let Backlog = document.getElementById("checkbox2").checked
       let Modules = document.getElementById("checkbox3").checked
@@ -128,7 +128,7 @@
       let PowerBI = document.getElementById("checkbox11").checked
       let IBM = document.getElementById("checkbox12").checked
       let Contacts = document.getElementById("checkbox13").checked
-      let Notes = document.getElementById("Notes").value
+    //   let Notes = document.getElementById("Notes").value
 
 
       function Progress() { 
@@ -161,7 +161,7 @@
           )}
 
         function updateProgress() {
-          let sqlStmt = "UPDATE Progress SET EmployeeID = "+ EmployeeID + ",MatchingPortal ="+MatchingPortal + ", Backlog ="+Backlog +", Modules ="+Modules +", Websites ="+Websites +", Plan ="+Plan +", Modules ="+Modules +", HRportal ="+HRportal +", CoreMentor ="+CoreMentor +", Teams ="+Teams +", OneStopShop ="+OneStopShop +", PowerBI ="+PowerBI +", IBM ="+IBM +", Contacts ="+Contacts +", Notes ="+Notes +" WHERE EmployeeID = " + EmployeeID;
+          let sqlStmt = "UPDATE Progress SET EmployeeID = "+ EmployeeID + ", MatchingPortal ="+MatchingPortal + ", Backlog ="+Backlog +", Modules ="+Modules +", Websites ="+Websites +", Plan ="+Plan +", Modules ="+Modules +", HRportal ="+HRportal +", CoreMentor ="+CoreMentor +", Teams ="+Teams +", OneStopShop ="+OneStopShop +", PowerBI ="+PowerBI +", IBM ="+IBM +", Contacts ="+Contacts +" WHERE EmployeeID = " + EmployeeID;
           console.log("hiii")
           MySql.Execute(
           "107.180.1.16", 
