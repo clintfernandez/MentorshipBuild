@@ -11,14 +11,11 @@
         <link href="style.css" rel="stylesheet" type="text/css" />
 		<style type="text/css">
 			body {
-				max-width: 40em;
-				width: 90%;
+				/* max-width: 40em; */
+				width: 100%;
 				margin-left: auto;
                 margin-right: auto;}
-            table,
-            td {
-                border: 1px solid black;
-                }
+
             img {
                 height: 200px;
                 width: 700px;
@@ -27,12 +24,33 @@
                 width: 500px;
                 height: 50px;
             }
+            form {
+                max-width: 40em;
+                margin-left: 25%;
+            }
 		</style>
 	</head>
 
 	<body>
-<h2>Onboarding Progress Tracker</h2>
+        <header>
+            <img src="toplogo.png">
+            <div class="navigation">
+              <table>
+                <tr>
+                    <td><a href="index.html">Home</a></td>
+                </tr>
+                <tr>
+                    <td><a href="create_account.html">Create Account</a></td>
+                </tr>
+                <tr>
+                    <td><a href="login.html">Log in</a></td>
+                </tr>
+              </table>
+            </div>
+          </header>
+
 <form id="form-id" action="mailto:someone@gmail.com?subject=Employee%20Onboarding%20Progress" method="POST" enctype=”multipart/form-data”>
+    <h2>Onboarding Progress Tracker</h2>
     <div>
         <img src="part1.png">
     </div>
