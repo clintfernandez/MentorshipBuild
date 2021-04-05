@@ -8,10 +8,10 @@
 		#fillDiv td {
 			padding: 2px;
 		}
-
+/*
 		#fillDiv td::after {
 			content: " | ";
-		}
+		}*/
 
 		#fillDiv div {
 			margin-bottom: 25px;
@@ -46,7 +46,7 @@
     <main>
 
       <div class="title">
-        <h1>Forums</h1>
+        <h1 id="forumChat">Forums</h1>
         <p id="description_one"> <strong>Welcome!</strong> Select a Forum Below: </p>
         <div id="fillDiv"></div>
       </div>
@@ -64,6 +64,7 @@
         MySql.Execute("107.180.1.16", "group62021", "2021group6", "group62021", sqlStmt, function (data){
                for (i=0; i<data.Result.length; i++) {
                	var option = document.createElement("div");
+                option.id = "option"
                	var row = document.createElement("tr");
                	var title = document.createElement("td");
                 title.innerHTML = data.Result[i].Title;
@@ -71,7 +72,7 @@
 
                 
                 console.log(data)
-				$($.trim(guts)).appendTo(row).bind('click', data.Result[i].ForumID, request);
+				$($.trim(guts)).appendTo(row).bind('click', data.Result[i].ForumID, openForum);
 				option.append(row)
         		document.getElementById("fillDiv").append(option);
 
@@ -80,16 +81,16 @@
         )
     }
 
-	    let MenteeID = ""
-	    let MentorID = ""
+	    
 	    let insertStmt = ""
 	    let checkStmt = ""
-    function request(data) { 
+      let postingEmployees = []
+    function openForum(data) { 
 	    console.log("here");
-	    let MentorID  = data.data
-	    console.log(MentorID);
+	    let ForumID  = data.data
+	    console.log(ForumID);
 	    
-	    let sqlSelect = "SELECT EmployeeID FROM Session;"
+	    let sqlSelect = "SELECT * FROM Posts Where ForumID = "+ForumID+";"
 	        MySql.Execute( 
 	          "107.180.1.16", 
 	          "group62021",
@@ -100,35 +101,60 @@
 	          function (data){
 	            console.log(data);
 	            console.log("result length: "+ data.Result.length);
-	            if (data.Result.length = 1){
-	            	MenteeID = data.Result[0].EmployeeID
-	            	values = "\"" + MentorID + "\", \"" + MenteeID + "\"";
-	            	insertStmt = "INSERT INTO Requests (MentorID, MenteeID) VALUES (" + values + ");";
-	            	checkStmt = "SELECT * FROM Requests WHERE MentorID = " + MentorID + " AND MenteeID = " + MenteeID
+	            option = document.getElementById("option")
+              option.remove()
+              document.getElementById("forumChat").innerHTML = "Posts"
+              document.getElementById("description_one").style.display = "none"
 
-	             	checksql();
+              for (i=0; i<data.Result.length; i++) {
+                var post = document.createElement("div");
+                post.class = "post"
+                var hr = document.createElement("hr")
+                var row1 = document.createElement("tr");
+                var row2 = document.createElement("tr")
+                var name = document.createElement("td")
+                name.id = "name" + data.Result[i].EmployeeID
+                postingEmployees.push(data.Result[i].EmployeeID)
+
+                var message = document.createElement("td");
+                message.innerHTML = data.Result[i].Message;
+                console.log(message.innerHTML)
+                
+                console.log(data)
+                row1.append(name)
+                post.append(row1)
+                row2.append(message)
+                post.append(row2)
+                post.append(hr)
+                document.getElementById("fillDiv").append(post);
+                fillName()
+
+        }
+
+	            // checksql();
 	            }
-	            else {
-	             alert("Must log in to request a mentor");
-	            }
-	          }
 	          )
 }
 
-	function checksql(){
+	function fillName(){
+    let nameSelect = "SELECT * from Employees"
+    console.log(nameSelect)
     	MySql.Execute(
       		"107.180.1.16", 
         	"group62021",
         	"2021group6",
         	"group62021",
-        	checkStmt,
+        	nameSelect,
         	function (data){
-        		if (data.Result.length < 1){
-        			insertsql()
-        		}
-        		else {
-        			alert("You already requested this mentor!")
-        		}
+            for (i=0; i<data.Result.length; i++){
+                  console.log(nameSelect)
+                  console.log(postingEmployees)
+              if (postingEmployees.includes(data.Result[i].EmployeeID)){
+              let name = data.Result[0].Name
+              document.getElementById("name"+data.Result[i].EmployeeID).innerHTML = name
+              console.log(name.innerHTML)
+            }
+            }            
         	}
       )
 		}
