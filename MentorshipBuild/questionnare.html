@@ -3,20 +3,66 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
+    <title>Matching Questionnare</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+      body {
+				/* max-width: 40em; */
+				width: 100%;
+				margin-left: auto;
+        margin-right: auto;}
+
+            img {
+                height: 200px;
+                width: 700px;
+            }
+            textarea {
+                width: 1000px;
+                height: 50px;
+            }
+        label {
+          text-align: left;
+          font-weight: bold;
+          width: 100%;
+        }
+        .fields {
+          margin-left: 2%;
+        }
+        .master-div-style {
+          max-width: 40em;
+          margin-left: 25%;
+        }
+    </style>
   </head>
   <body>
+    <header>
+      <img src="toplogo.png">
+      <div class="navigation">
+        <table>
+          <tr>
+              <td><a href="index.html">Home</a></td>
+          </tr>
+          <tr>
+              <td><a href="create_account.html">Create Account</a></td>
+          </tr>
+          <tr>
+              <td><a href="login.html">Log in</a></td>
+          </tr>
+        </table>
+      </div>
+    </header>
+    
     <div class="master-div-style">
+      <h2>Mentor Matching Questionnare</h2>
       <p id="description">Please complete this form to find potential mentors to be paired with.</p>
-      <form id="survey-form" action="/do-something">
+      <form id="survey-form">
         <div class="form-rows">
           <div class="labels">
             <label for="name" id="name-label">Name</label>
           </div>
           <div class="fields">
             <input type="text" id="name" class="input-fields" placeholder="Enter your name" required="">
-          </div>
+          </div><br>
         </div>
         <div class="form-rows">
             <div class="labels">
@@ -24,15 +70,15 @@
             </div>
             <div class="fields">
               <input type="text" id="ID" class="input-fields" placeholder="Enter your employee ID" required="">
-            </div>
+            </div><br>
           </div>
         <div class="form-rows">
           <div class="labels">
             <label for="email" id="email-label">Email</label>
           </div>
           <div class="fields">
-            <input type="email" id="email" class="input-fields" placeholder="Enter your email address" required="">
-          </div>
+            <input type="text" id="email" class="input-fields" placeholder="Enter your email address" required="">
+          </div><br>
         </div>
         <div class="form-rows">
           <div class="labels">
@@ -45,7 +91,7 @@
                 <option value="hybrid">Hybrid</option>
               <option value="other">Other</option>
             </select>
-          </div>
+          </div><br>
         </div>
         <div class="form-rows">
           <div class="labels">
@@ -60,7 +106,7 @@
                 <option value="cst">Central Standard Time (CST)</option>
                 <option value="est">Eastern Standard Time (EST)</option>
             </select>
-          </div>
+          </div><br>
         </div>
         <div class="form-rows">
           <div class="labels">
@@ -73,7 +119,7 @@
                 <option value="monthly">Monthly</option>
                 <option value="weekly">Weekly</option>
             </select>
-          </div>
+          </div><br>
         </div>
         <div class="form-rows">
           <div class="labels">
@@ -152,6 +198,7 @@
                 sqlStmt,
                 function(data){
                   console.log(data);
+                  console.log('hi')
                 }
               )
           }
