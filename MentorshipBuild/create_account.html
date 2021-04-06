@@ -3,6 +3,14 @@
   <head>
     <title>Create Account</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+      label{
+        margin-left: none;
+      }
+      nav {
+        align-content: left;
+      }
+    </style>
   </head>
 
   <body>
@@ -31,15 +39,15 @@
     <main>
 
       <div class="title">
-        <h1>Around The Corner</h1>
+        <h1>MentorMatch</h1>
         <p id="description_one"> <strong>Welcome!</strong> Let's get your account started: </p>
       </div>
 
       <nav>
-        <label for="EmployeeType">I am a </label><select type="text" id="EmployeeType"><option value="Mentee">Mentee</option><option value="Mentor">Mentor</option></select>
-        <label for="fname">Name: </label><input type="text" id="name">
-        <label for="email">Email: </label><input type="text" id="email">
-        <label for="password">Password: </label><input type="password" id="password">
+        <label for="EmployeeType">I am a </label><select type="text" id="EmployeeType"><option value="Mentee">Mentee</option><option value="Mentor">Mentor</option></select><br>
+        <label for="fname">Name: </label><input type="text" id="name"><br>
+        <label for="email">Email: </label><input type="text" id="email"><br>
+        <label for="password">Password: </label><input type="password" id="password"><br>
         <div id="center"><button onclick="createAccount()" id="createAccount">Create Account</button></div>
       </nav>
     </main>

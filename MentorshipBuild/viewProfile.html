@@ -5,9 +5,35 @@
     <meta name="viewport" content="width=device-width">
     <title>View Profile</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+      .searchBody {
+				/* max-width: 40em; */
+				margin-left: 20%;
+        
+      }
+      p {
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
-    <div class="navigation">
+    <header>
+      <img src="toplogo.png">
+      <div class="navigation">
+        <table>
+          <tr>
+              <td><a href="index.html">Home</a></td>
+          </tr>
+          <tr>
+              <td><a href="create_account.html">Create Account</a></td>
+          </tr>
+          <tr>
+              <td><a href="login.html">Log in</a></td>
+          </tr>
+        </table>
+      </div>
+    </header>
+    <div class="searchBody">
       <p>Search for employee by name: </p>
       <input type="text" id="nameSearch" placeholder="Enter name">
       <button class="button" id="search" onclick="searchEmployees()">Search</button>
