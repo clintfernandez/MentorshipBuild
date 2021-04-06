@@ -62,7 +62,7 @@ main {
 
 /* homepage */ 
 .title {
-	padding: 15px 450px 30px 50px;
+	padding: 15px 450px 10px 50px;
 	font-family: Arial;
 }
 
@@ -133,8 +133,8 @@ header img {
 	
 	nav {
 		font-weight: bold;
-		text-align: center;
-		padding: 20px;
+		text-align: left;
+		padding-left: 10%;
 		border-radius: 5px;
 		color: darkblue;
 	}
@@ -153,7 +153,11 @@ header img {
 	nav a:hover {
 		color: #A52A2A;
 	}
-	
+	nav textarea {
+		height: 50px;
+		width: 700px;
+		padding-left: 3%;
+	}
 	input[type=text] {
 	  width: 65%;
 	  padding: 12px;
