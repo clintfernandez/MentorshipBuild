@@ -40,9 +40,9 @@
               sqlSelect,
               function (data){
                 console.log(data);
-                document.getElementById("name").value = data.Result.Name[0];
-                document.getElementById("email").value = data.Result.Email[0];
-                document.getElementById("type").value = data.Result.EmployeeType[0];
+                document.getElementById("name").value = data.Result[0].Name;
+                document.getElementById("email").value = data.Result[0].Email;
+                document.getElementById("type").value = data.Result[0].EmployeeType;
       }
         )
       }
