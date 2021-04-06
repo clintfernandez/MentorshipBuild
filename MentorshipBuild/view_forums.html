@@ -64,14 +64,13 @@
         MySql.Execute("107.180.1.16", "group62021", "2021group6", "group62021", sqlStmt, function (data){
                for (i=0; i<data.Result.length; i++) {
                	var option = document.createElement("div");
-                option.id = "option"
+                option.className = "option"
                	var row = document.createElement("tr");
                	var title = document.createElement("td");
                 title.innerHTML = data.Result[i].Title;
                 var guts = '<button>'+title.innerHTML+'</button>';
 
                 
-                console.log(data)
 				$($.trim(guts)).appendTo(row).bind('click', data.Result[i].ForumID, openForum);
 				option.append(row)
         		document.getElementById("fillDiv").append(option);
@@ -84,13 +83,13 @@
 	    
 	    let insertStmt = ""
 	    let checkStmt = ""
+      let currentForumID = ""
       let postingEmployees = []
     function openForum(data) { 
 	    console.log("here");
-	    let ForumID  = data.data
-	    console.log(ForumID);
+	    currentForumID  = data.data
 	    
-	    let sqlSelect = "SELECT * FROM Posts Where ForumID = "+ForumID+";"
+	    let sqlSelect = "SELECT * FROM Posts Where ForumID = "+currentForumID+";"
 	        MySql.Execute( 
 	          "107.180.1.16", 
 	          "group62021",
@@ -101,8 +100,11 @@
 	          function (data){
 	            console.log(data);
 	            console.log("result length: "+ data.Result.length);
-	            option = document.getElementById("option")
-              option.remove()
+	            options = document.getElementsByClassName("option")
+              for (i=0; i<options.length; i++){
+                options[i].remove()
+              }
+              
               document.getElementById("forumChat").innerHTML = "Posts"
               document.getElementById("description_one").style.display = "none"
 
@@ -134,6 +136,7 @@
 	            // checksql();
 	            }
 	          )
+          
 }
 
 	function fillName(){
@@ -154,22 +157,64 @@
               document.getElementById("name"+data.Result[i].EmployeeID).innerHTML = name
               console.log(name.innerHTML)
             }
-            }            
+            }          
         	}
       )
+            var textarea = document.createElement("textarea")
+            textarea.rows="10"
+            textarea.cols="100"
+            textarea.id = "newMessage"
+            var forButton = document.createElement("div")
+            var postButton = '<button>Post</button>';
+            $($.trim(postButton)).appendTo(forButton).bind('click', currentForumID, newPost);
+            document.getElementById("fillDiv").append(textarea)
+            document.getElementById("fillDiv").append(forButton)
+
+
 		}
 
-    function insertsql(){
-    	console.log(insertStmt)
-    	MySql.Execute(
-        	"107.180.1.16", 
-        	"group62021",
-        	"2021group6",
-        	"group62021",
-        	insertStmt
-      )
-		}
+let insertNewPost = ""
+    function newPost(forum){
+    	let sqlSelect = "SELECT EmployeeID FROM Session;"
+      let EmployeeID =""
+      let newMessage = document.getElementById("newMessage").value
+          MySql.Execute( 
+            "107.180.1.16", 
+            "group62021",
+            "2021group6",
+            "group62021",
 
+            sqlSelect,
+            function (data){
+              console.log(data);
+              console.log("result length: "+ data.Result.length);
+              if (data.Result.length = 1){
+                EmployeeID = data.Result[0].EmployeeID
+                insertNewPost = "INSERT INTO Posts (ForumID, EmployeeID, Message) VALUES ("+forum.data+", "+EmployeeID+", \""+ newMessage+"\");"
+                console.log("So close")
+                showMeTheMoney();
+              }
+              else {
+               alert("Must log in to post");
+              }
+            }
+            )
+}
+
+function showMeTheMoney(){
+  console.log(insertNewPost)
+          MySql.Execute( 
+            "107.180.1.16", 
+            "group62021",
+            "2021group6",
+            "group62021",
+
+            insertNewPost,
+            function(data){
+              console.log(data)
+            }
+            )
+        }
     </script>
   </body>
 
