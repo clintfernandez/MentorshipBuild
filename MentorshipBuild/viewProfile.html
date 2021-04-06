@@ -10,7 +10,7 @@
     <div class="navigation">
       <p>Search for employee by name: </p>
       <input type="text" id="nameSearch" placeholder="Enter name">
-      <button class="button" id="search" onclick="searchEmployees">Search</button>
+      <button class="button" id="search" onclick="searchEmployees()">Search</button>
       <br><br>
       <label>Employee Name: </label>
       <input type="text" id="name" disabled><br>
@@ -40,9 +40,9 @@
               sqlSelect,
               function (data){
                 console.log(data);
-                document.getElementById("name").text = data.Result.Name;
-                document.getElementById("email").text = data.Result.Email;
-                document.getElementById("type").text = data.Result.EmployeeType;
+                document.getElementById("name").value = data.Result.Name;
+                document.getElementById("email").value = data.Result.Email;
+                document.getElementById("type").value = data.Result.EmployeeType;
       }
         )
       }
