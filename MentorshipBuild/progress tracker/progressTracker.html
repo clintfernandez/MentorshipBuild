@@ -33,7 +33,7 @@
 
 	<body>
         <header>
-            <img src="toplogo.png">
+            <img src="../toplogo.png">
             <div class="navigation">
               <table>
                 <tr>
@@ -148,73 +148,53 @@
       let IBM = document.getElementById("checkbox12").checked
       let Contacts = document.getElementById("checkbox13").checked
     //   let Notes = document.getElementById("Notes").value
-function updateProgress(){
 
-
-    var mysql = require('./mysql');
-
-    var con = mysql.createConnection({
-        host: "107.180.1.16",
-        user: "group62021",
-        password: "2021group6",
-        database: "group62021"
-    });
-
-    con.connect(function(err) {
-    if (err) throw err;
-    var sql = "UPDATE Progress SET ProgressID=1 WHERE ProgressID=1";
-    con.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log(result.affectedRows + " record(s) updated");
-    });
-    });
-}
-    //   function Progress() { 
-    //     console.log("here");
+      function Progress() { 
+        console.log("here");
         
         
 
-    //     let sqlSelect = "SELECT ProgressID FROM Progress";
+        let sqlSelect = "SELECT ProgressID FROM Progress";
         
-    //     MySql.Execute( 
-    //       "107.180.1.16", 
-    //       "group62021",
-    //       "2021group6",
-    //       "group62021",
+        MySql.Execute( 
+          "107.180.1.16", 
+          "group62021",
+          "2021group6",
+          "group62021",
 
-    //       sqlSelect,
-    //       function (data){
-    //         console.log(data);
-    //         if (data.Result.length != 0){
-    //           ProgressID = data.Result[0].ProgressID;
-    //           console.log(ProgressID);
-    //           updateProgress();
+          sqlSelect,
+          function (data){
+            console.log(data);
+            if (data.Result.length != 0){
+              ProgressID = data.Result[0].ProgressID;
+              console.log(ProgressID);
+              updateProgress();
               
-    //         }
-    //         else {
-    //          console.log('hi there');
+            }
+            else {
+             console.log('hi there');
 
-    //         }
-    //       }
-    //       )
-    //     }
+            }
+          }
+          )
+        }
 
-    //     function updateProgress() {
-    //     //   let sqlStmt = "UPDATE Progress SET ProgressID="+ProgressID+",EmployeeID="+EmployeeID+",MatchingPortal="+MatchingPortal+",Backlog="+Backlog+",Modules="+Modules+",Websites="+Websites+",Plan="+Plan+",Modules="+Modules+",HRportal="+HRportal+",CoreMentor="+CoreMentor+",Teams="+Teams+",OneStopShop="+OneStopShop+",PowerBI="+PowerBI+",IBM="+IBM+",Contacts="+Contacts+" WHERE ProgressID=1";
-    //       let sqlStmt = "UPDATE Progress SET ProgressID=1 WHERE ProgressID=1";
+        function updateProgress() {
+        //   let sqlStmt = "UPDATE Progress SET ProgressID="+ProgressID+",EmployeeID="+EmployeeID+",MatchingPortal="+MatchingPortal+",Backlog="+Backlog+",Modules="+Modules+",Websites="+Websites+",Plan="+Plan+",Modules="+Modules+",HRportal="+HRportal+",CoreMentor="+CoreMentor+",Teams="+Teams+",OneStopShop="+OneStopShop+",PowerBI="+PowerBI+",IBM="+IBM+",Contacts="+Contacts+" WHERE ProgressID=1";
+          let sqlStmt = "UPDATE Progress SET ProgressID=1 WHERE ProgressID=1";
 
-    //       console.log("hiii")
-    //       MySql.Execute(
-    //       "107.180.1.16", 
-    //       "group62021",
-    //       "2021group6",
-    //       "group62021",
+          console.log("hiii")
+          MySql.Execute(
+          "107.180.1.16", 
+          "group62021",
+          "2021group6",
+          "group62021",
 
-    //       sqlStmt,
-    //       console.log(sqlStmt)
+          sqlStmt,
+          console.log(sqlStmt)
          
-    //     )
-    //     }
+        )
+        }
     </script>
 
 </html>
