@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Update Profile</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body onload="load()">
+    <header>
+      <img src="toplogo.png">
+      <div class="navigation">
+        <table>
+          <tr>
+              <td><a href="index.html">Home</a></td>
+          </tr>
+          <tr>
+              <td><a href="create_account.html">Create Account</a></td>
+          </tr>
+          <tr>
+              <td><a href="login.html">Log in</a></td>
+          </tr>
+        </table>
+      </div>
+    </header>
+    <div class="navigation">
+      <h1>Update Profile </h1>
+      
+      <label>Employee Email: </label>
+      <input type="text" id="email"><br>
+      <label>Employee Password: </label>
+      <input type="text" id="password">
+      <br>
+      <button class="button" id="update" onclick="getEmpID()">Update</button>
+      
+
+      <script src="https://mysqljs.com/mysql.js" type="text/javascript"></script>
+      <script>
+      function getEmpID() {
+        let EmployeeID = ""
+        var email;
+        var password;
+        let sqlSelect = "SELECT EmployeeID FROM Session WHERE SessionID like 1;";
+
+        MySql.Execute( 
+          "107.180.1.16", 
+          "group62021",
+          "2021group6",
+          "group62021",
+
+          sqlSelect,
+          function (data){
+            console.log(data);
+            if (data.Result.length != 0){
+              EmployeeID = data.Result[0].EmployeeID;
+              console.log(EmployeeID);
+              email = document.getElementById("email").value;
+              password = document.getElementById("password").value;
+              updateProfile();
+            }
+            else {
+             console.log('hi there');
+
+            }
+          }
+          )
+
+        function updateProfile() {
+          let sqlStmt = "UPDATE Employees SET Email = \"" + email + "\"" + ", Password = \"" + password + "\"" + "WHERE EmployeeID = " + EmployeeID;
+
+          MySql.Execute( 
+              "107.180.1.16", 
+              "group62021",
+              "2021group6",
+              "group62021",
+              sqlStmt,
+              function (data){
+                console.log(data)
+              }
+        )
+        }
+      }
+      function load() {
+        let EmployeeID = ""
+        var email;
+        var password;
+        let sqlSelect = "SELECT EmployeeID FROM Session WHERE SessionID like 1;";
+        MySql.Execute( 
+          "107.180.1.16", 
+          "group62021",
+          "2021group6",
+          "group62021",
+
+          sqlSelect,
+          function (data){
+            console.log(data);
+            if (data.Result.length != 0){
+              EmployeeID = data.Result[0].EmployeeID;
+              console.log(EmployeeID);
+              loadBoxes();
+            }
+            else {
+             console.log('hi there');
+
+            }
+          }
+          )
+          function loadBoxes() {
+            let sqlSelect2 = "SELECT Email, Password FROM Employees WHERE EmployeeID like \"" + EmployeeID +"\";";
+
+            MySql.Execute( 
+            "107.180.1.16", 
+            "group62021",
+            "2021group6",
+            "group62021",
+
+            sqlSelect2,
+            function (data){
+              console.log(data);
+              if (data.Result.length != 0){
+                document.getElementById("email").value = data.Result[0].Email;
+                document.getElementById("password").value = data.Result[0].Password;
+                
+              }
+              else {
+              console.log('hi there');
+
+              }
+            }
+            )
+            }
+          
+      }
+      </script>
+  </body>
+</html>
